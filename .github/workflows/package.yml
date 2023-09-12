@@ -85,7 +85,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: 'npm'
+          cache: 'yarn'
       - name: Retrieve cached dependencies
         uses: actions/cache@v2
         id: npm-cache
