@@ -32,7 +32,7 @@ function main(context) {
     queryModPath: () => '.',
     logo: 'remnant2.jpg',
     executable: () => 'Remnant2.exe',
-    requiresLauncher: true,
+    requiresLauncher: () => true,
     requiredFiles: [
       'Remnant2.exe',
       'Remnant2/Binaries/Win64/Remnant2-Win64-Shipping.exe',
