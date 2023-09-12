@@ -32,7 +32,7 @@ jobs:
           key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
       - name: Install all dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: yarn install --frozen-lockfile --check-files
 
   package-dev:
     name: Package Dev Build
