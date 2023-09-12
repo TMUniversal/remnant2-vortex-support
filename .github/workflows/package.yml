@@ -2,7 +2,7 @@ name: Package
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   dependencies:
@@ -46,6 +46,13 @@ jobs:
         uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
@@ -81,11 +88,20 @@ jobs:
         uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: 'yarn'
+
       - name: Retrieve cached dependencies
         uses: actions/cache@v3
         id: npm-cache
@@ -93,8 +109,10 @@ jobs:
           path: |
             node_modules
           key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+
       - name: package it up
         run: task package
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
