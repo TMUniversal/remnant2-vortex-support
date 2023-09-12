@@ -4,7 +4,6 @@ tasks:
   default:
     cmds:
       - task: clean
-      - task: prepare
       - task: package
 
   prepare:
@@ -23,13 +22,11 @@ tasks:
       - cp remnant2.jpg ./dist/
 
   package:
+    deps:
+      - prepare
     vars:
       VERSION:
         sh: node -pe 'p = require("./package.json"); `${p["version"]}`'
-      HASH:
-        sh: git rev-parse --short HEAD
-      TIMESTAMP:
-        sh: date +%Y%m%d-%H%M
     sources:
       - dist/index.js
       - dist/info.json
@@ -39,7 +36,24 @@ tasks:
     cmds:
       - 7z a ./RemnantII_Vortex_Support-v{{.VERSION}}.7z ./dist/*
 
+  package-dev:
+    deps:
+      - prepare
+    vars:
+      DESCRIBE:
+        sh: git describe --tags --dirty --always
+      TIMESTAMP:
+        sh: date +%Y%m%d-%H%M
+    sources:
+      - dist/index.js
+      - dist/info.json
+      - dist/remnant2.jpg
+    generates:
+      - dist/RemnantII_Vortex_Support-dev-{{.DESCRIBE}}-v{{.TIMESTAMP}}.7z
+    cmds:
+      - 7z a ./RemnantII_Vortex_Support-dev-{{.DESCRIBE}}-v{{.TIMESTAMP}}.7z ./dist/*
+
   clean:
     cmds:
       - rm -rf ./dist
-      - rm -f ./RemnantII_Vortex_Support-v*.7z
+      - rm -f ./RemnantII_Vortex_Support-*.7z

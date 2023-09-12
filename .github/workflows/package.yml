@@ -1,0 +1,102 @@
+name: Package
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  dependencies:
+    name: Dependencies
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['16.17.0']
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - name: Retrieve cached dependencies
+        uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+      - name: Install all dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+  package-dev:
+    name: Package Dev Build
+    needs: [dependencies]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['16.17.0']
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - name: Retrieve cached dependencies
+        uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+
+      - name: package it up
+        run: task package-dev
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dev-release-zip
+          path: 'RemnantII_Vortex_Support-dev-*.7z'
+
+  package-release:
+    name: Package
+    needs: [dependencies]
+    if: "(contains(github.event.commits[0].message, 'release') || contains(github.event.commits[1].message, 'release')) && !contains(github.event.commits[0].message, 'gonk')"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['16.17.0']
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+      - name: Retrieve cached dependencies
+        uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+      - name: package it up
+        run: task package
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-zip
+          path: 'RemnantII_Vortex_Support-*.7z'
