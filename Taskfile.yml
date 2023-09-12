@@ -2,8 +2,26 @@ version: "3"
 
 tasks:
   default:
-    deps:
-      - package
+    cmds:
+      - task: clean
+      - task: prepare
+      - task: package
+
+  prepare:
+    sources:
+      - index.js
+      - info.json
+      - remnant2.jpg
+    generates:
+      - dist/index.js
+      - dist/info.json
+      - dist/remnant2.jpg
+    cmds:
+      - mkdir -p ./dist
+      - cp index.js ./dist/
+      - cp info.json ./dist/
+      - cp remnant2.jpg ./dist/
+
   package:
     vars:
       VERSION:
@@ -12,5 +30,16 @@ tasks:
         sh: git rev-parse --short HEAD
       TIMESTAMP:
         sh: date +%Y%m%d-%H%M
+    sources:
+      - dist/index.js
+      - dist/info.json
+      - dist/remnant2.jpg
+    generates:
+      - dist/RemnantII_Vortex_Support-v{{.VERSION}}.7z
     cmds:
-      - 7z a -r -x!*.git* -x!*.vscode* -x!*.idea* -x!*.DS_Store* -x!*.gitignore* -x!*.gitattributes* -x!*dist* ./dist/RemnantII_Vortex_Support-v{{.VERSION}}.7z .
+      - 7z a ./RemnantII_Vortex_Support-v{{.VERSION}}.7z ./dist/*
+
+  clean:
+    cmds:
+      - rm -rf ./dist
+      - rm -f ./RemnantII_Vortex_Support-v*.7z
