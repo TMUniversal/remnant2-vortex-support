@@ -15,5 +15,8 @@
       "package.json",
       "info.json"
     ]
+  },
+  "devDependencies": {
+    "standard-version": "9.5.0"
   }
 }
