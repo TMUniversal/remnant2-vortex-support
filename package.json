@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "name": "remnant2-vortex-support",
   "private": true,
   "scripts": {
@@ -9,11 +9,17 @@
   "standard-version": {
     "packageFiles": [
       "package.json",
-      "info.json"
+      {
+        "filename": "info.json",
+        "updater": "scripts/standard-version-updater-info-json.js"
+      }
     ],
     "bumpFiles": [
       "package.json",
-      "info.json"
+      {
+        "filename": "info.json",
+        "updater": "scripts/standard-version-updater-info-json.js"
+      }
     ]
   },
   "devDependencies": {
