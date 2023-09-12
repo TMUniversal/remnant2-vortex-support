@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "name": "remnant2-vortex-support",
+  "private": true,
+  "scripts": {
+    "first-release": "standard-version --first-release",
+    "bumpversion": "standard-version"
+  },
+  "standard-version": {
+    "packageFiles": [
+      "package.json",
+      "info.json"
+    ],
+    "bumpFiles": [
+      "package.json",
+      "info.json"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+version: "3"
+
+tasks:
+  default:
+    deps:
+      - package
+  package:
+    vars:
+      VERSION:
+        sh: node -pe 'p = require("./package.json"); `${p["version"]}`'
+      HASH:
+        sh: git rev-parse --short HEAD
+      TIMESTAMP:
+        sh: date +%Y%m%d-%H%M
+    cmds:
+      - 7z a -r -x!*.git* -x!*.vscode* -x!*.idea* -x!*.DS_Store* -x!*.gitignore* -x!*.gitattributes* -x!*dist* ./dist/RemnantII_Vortex_Support-v{{.VERSION}}.7z .
