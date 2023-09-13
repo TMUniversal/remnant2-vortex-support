@@ -17,3 +17,8 @@ alternatively, you can install the extension manually:
 1. Open Vortex and navigate to the Games view.
 2. Search for Remnant II and click on the game card ("Activate" should be displayed on the card).
 3. Select the "Mods" tab and install mods as you normally would.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPL3.0-or-later).
+See the [LICENSE](LICENSE) file for details.
