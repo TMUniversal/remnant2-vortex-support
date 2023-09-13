@@ -12,6 +12,11 @@ alternatively, you can install the extension manually:
 2. Open Vortex and navigate to the Extensions view.
 3. Drag and drop the downloaded file onto the Vortex window.
 
+Extra manual installation:
+
+Extract the downloaded archive to the Vortex plugins folder: `%appdata%\Vortex\plugins`,
+so that you have a sub-directory in `%appdata%\Vortex\plugins` containing the `info.json` file.
+
 ## Usage
 
 1. Open Vortex and navigate to the Games view.
