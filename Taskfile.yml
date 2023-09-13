@@ -11,15 +11,18 @@ tasks:
       - index.js
       - info.json
       - remnant2.jpg
+      - LICENSE.txt
     generates:
       - dist/index.js
       - dist/info.json
       - dist/remnant2.jpg
+      - dist/LICENSE.txt
     cmds:
       - mkdir -p ./dist
       - cp index.js ./dist/
       - cp info.json ./dist/
       - cp remnant2.jpg ./dist/
+      - cp LICENSE.txt ./dist/
 
   package:
     deps:
@@ -31,6 +34,7 @@ tasks:
       - dist/index.js
       - dist/info.json
       - dist/remnant2.jpg
+      - dist/LICENSE.txt
     generates:
       - dist/RemnantII_Vortex_Support-v{{.VERSION}}.7z
     cmds:
@@ -48,6 +52,7 @@ tasks:
       - dist/index.js
       - dist/info.json
       - dist/remnant2.jpg
+      - dist/LICENSE.txt
     generates:
       - dist/RemnantII_Vortex_Support-dev-{{.DESCRIBE}}-v{{.TIMESTAMP}}.7z
     cmds:
