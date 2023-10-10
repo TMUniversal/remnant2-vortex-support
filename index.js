@@ -58,7 +58,18 @@ function main(context) {
     name: 'Remnant II',
     mergeMods: true,
     queryPath: findGame,
-    supportedTools: [],
+    supportedTools: [{
+      // Remnant Save Guardian: Save backups and analysis
+      // https://github.com/Razzmatazzz/RemnantSaveGuardian
+      id: 'remnant-save-guardian',
+      name: 'Remnant Save Guardian',
+      shortName: 'RSG',
+      logo: 'remnant-save-guardian.png',
+      executable: () => 'RemnantSaveGuardian.exe',
+      requiredFiles: [
+        'RemnantSaveGuardian.exe',
+      ],
+    }],
     // most mods include the full path in their archive, so we don't need to extract them
     queryModPath: () => '.',
     logo: 'remnant2.jpg',
