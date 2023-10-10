@@ -12,15 +12,46 @@ const GOGAPP_ID = undefined; // remnant2 is not on GOG
 
 function findGame() {
   return util.GameStoreHelper.findByAppId([STEAMAPP_ID])
-      .then(game => game.gamePath);
+    .then(game => game.gamePath);
 }
 
-function prepareForModding(discovery) {
+function raiseNotify(api) {
+  api.sendNotification({
+    id: 'remnant2-missing-injector',
+    type: 'warning',
+    message: api.translate('An injector mod is required'),
+    allowSuppress: true,
+    actions: [
+      {
+        title: 'More',
+        action: () => {
+          api.showDialog('question', 'Action required', {
+            text: '"Allow Asset Mods" is required to enable Remnant II mods. ' +
+              'Please ensure it is installed and enabled.' +
+              'If you are on Steam Deck, select the Steam Deck version of "Allow Asset Mods",' +
+              'and refer to the mod page for additional setup instructions.'
+          }, [
+            { label: 'Cancel', action: (dismiss) => dismiss() },
+            {
+              label: 'Go to "Allow Asset Mods" mod page', action: (dismiss) => {
+                util.opn('https://www.nexusmods.com/remnant2/mods/2').catch(err => undefined);
+                dismiss();
+              }
+            },
+          ]);
+        },
+      },
+    ],
+  });
+}
+
+function prepareForModding(discovery, api) {
+  raiseNotify(api);
   return fs.ensureDirWritableAsync(path.join(discovery.path, 'Remnant2', 'Binaries', 'Win64', 'Mods'));
 }
 
 function main(context) {
-	//This is the main function Vortex will run when detecting the game extension. 
+  //This is the main function Vortex will run when detecting the game extension. 
 
   context.registerGame({
     id: GAME_ID,
@@ -37,7 +68,7 @@ function main(context) {
       'Remnant2.exe',
       'Remnant2/Binaries/Win64/Remnant2-Win64-Shipping.exe',
     ],
-    setup: prepareForModding,
+    setup: (discovery) => prepareForModding(discovery, context.api),
     environment: {
       SteamAPPId: STEAMAPP_ID,
     },
@@ -49,10 +80,10 @@ function main(context) {
       // ]
     },
   });
-	
-	return true;
+
+  return true;
 }
 
 module.exports = {
-    default: main,
+  default: main,
 };
