@@ -18,21 +18,15 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - uses: actions/checkout@v4
+
       - name: Setup Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: 'yarn'
-      - name: Retrieve cached dependencies
-        uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+          cache: 'pnpm'
+
       - name: Install all dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile --check-files
+        run: pnpm install --frozen-lockfile
 
   package-dev:
     name: Package Dev Build
@@ -57,14 +51,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: 'yarn'
-      - name: Retrieve cached dependencies
-        uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+          cache: 'pnpm'
 
       - name: package it up
         run: task package-dev
@@ -100,15 +87,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: 'yarn'
-
-      - name: Retrieve cached dependencies
-        uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-ubuntu-latest-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+          cache: 'pnpm'
 
       - name: package it up
         run: task package
