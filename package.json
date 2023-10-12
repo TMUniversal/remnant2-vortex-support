@@ -1,28 +1,56 @@
 {
   "version": "0.0.4",
+  "author": "TMUniversal",
   "name": "remnant2-vortex-support",
+  "description": "Vortex support for Remnant II",
   "private": true,
+  "license": "GPL-3.0-or-later",
   "scripts": {
-    "first-release": "standard-version --first-release",
+    "copyplugin": "pnpm run copy_assets && node copyplugin.js",
+    "copy_assets": "copyfiles -f assets/* dist && copyfiles -f assets/content/* dist/content",
+    "webpack": "node ./node_modules/webpack/bin/webpack --config webpack.config.js --stats-error-details --progress --profile --color",
+    "build": "pnpm run webpack && pnpm run copy_assets && extractInfo && json -f dist/info.json -I -e \"this.name=\\\"Game: Remnant II\\\"\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
     "bumpversion": "standard-version"
+  },
+  "devDependencies": {
+    "@types/node": "20.8.4",
+    "@types/react": "18.2.27",
+    "@typescript-eslint/eslint-plugin": "6.7.5",
+    "@typescript-eslint/parser": "6.7.5",
+    "7z-bin": "Nexus-Mods/7z-bin",
+    "bluebird": "3.7.2",
+    "copyfiles": "2.4.1",
+    "eslint": "8.51.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-react": "7.33.2",
+    "i18next": "23.5.1",
+    "json": "11.0.0",
+    "react": "18.2.0",
+    "react-bootstrap": "2.9.0",
+    "ts-loader": "9.5.0",
+    "typescript": "5.2.2",
+    "vortex-api": "Nexus-Mods/vortex-api",
+    "webpack": "5.88.2",
+    "webpack-cli": "5.1.4"
+  },
+  "homepage": "https://www.nexusmods.com/site/mods/645",
+  "bugs": {
+    "url": "https://www.nexusmods.com/site/mods/645",
+    "email": "bugs@tmuniversal.eu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TMUniversal/remnant2-vortex-support.git"
   },
   "standard-version": {
     "packageFiles": [
-      "package.json",
-      {
-        "filename": "info.json",
-        "updater": "scripts/standard-version-updater-info-json.js"
-      }
+      "package.json"
     ],
     "bumpFiles": [
-      "package.json",
-      {
-        "filename": "info.json",
-        "updater": "scripts/standard-version-updater-info-json.js"
-      }
+      "package.json"
     ]
-  },
-  "devDependencies": {
-    "standard-version": "9.5.0"
   }
 }

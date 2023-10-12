@@ -8,23 +8,16 @@ tasks:
 
   prepare:
     sources:
-      - index.js
-      - info.json
-      - remnant2.jpg
+      - assets/
+      - src/
       - LICENSE.txt
     generates:
       - dist/index.js
       - dist/info.json
-      - dist/remnant2.jpg
-      - dist/remnant-save-guardian.png
+      - dist/gameart.jpg
       - dist/LICENSE.txt
     cmds:
-      - mkdir -p ./dist
-      - cp index.js ./dist/
-      - cp info.json ./dist/
-      - cp remnant2.jpg ./dist/
-      - cp assets/remnant-save-guardian.png ./dist/
-      - cp LICENSE.txt ./dist/
+      - yarn build
 
   package:
     deps:
@@ -41,7 +34,7 @@ tasks:
     generates:
       - dist/RemnantII_Vortex_Support-v{{.VERSION}}.7z
     cmds:
-      - 7z a ./RemnantII_Vortex_Support-v{{.VERSION}}.7z ./dist/*
+      - 7z a -t7z ./RemnantII_Vortex_Support-v{{.VERSION}}.7z ./dist/*
 
   package-dev:
     deps:
