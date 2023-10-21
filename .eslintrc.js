@@ -1,33 +1,30 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
   },
-  "extends": [
+  extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
-  "ignorePatterns": [
+  plugins: ["react", "@typescript-eslint"],
+  ignorePatterns: [
     "copyAssets.js",
     "copyplugin.js",
     "**/node_modules/**",
     "**/dist/**",
   ],
-  "rules": {
+  rules: {
     // If you are reading this your are probably wondering why we got so many warnings
     // To put it simple, we used TSLint, and when we moved to ESLint we did not want to to auto fix all the errors
     // so now these are warning and we fix them only when we touch the files with warning
@@ -59,7 +56,7 @@ module.exports = {
     "prefer-spread": "warn",
 
     "@typescript-eslint/prefer-as-const": "warn",
-    "@typescript-eslint/no-extra-semi": "warn",    
+    "@typescript-eslint/no-extra-semi": "warn",
     "@typescript-eslint/no-var-requires": "warn",
     "@typescript-eslint/no-this-alias": "warn",
     "@typescript-eslint/no-empty-function": "warn",
@@ -90,7 +87,7 @@ module.exports = {
     "@typescript-eslint/no-empty-interface": "warn",
 
     // !!! Vortex specific rules mentioned in the Vortex code standards and style guides !!!
-    
+
     // Massimo and Sebastian agreed on turning this off
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
@@ -98,54 +95,54 @@ module.exports = {
     "@typescript-eslint/naming-convention": [
       "warn",
       {
-        "selector": "interface",
-        "format": ["PascalCase"],
-        "custom": {
-          "regex": "^I[A-Z]",
-          "match": true
-        }
-      }
+        selector: "interface",
+        format: ["PascalCase"],
+        custom: {
+          regex: "^I[A-Z]",
+          match: true,
+        },
+      },
     ],
     "no-restricted-imports": [
       "warn",
       {
-        "name": "bluebird",
-        "message": "Please avoid using Bluebird. Use ES6 promises instead"
-      }
+        name: "bluebird",
+        message: "Please avoid using Bluebird. Use ES6 promises instead",
+      },
     ],
     "max-lines-per-function": [
       "warn",
       {
-        "max": 500,
-        "skipComments": true,
-        "skipBlankLines": true
-      }
+        max: 500,
+        skipComments: true,
+        skipBlankLines: true,
+      },
     ],
     "max-len": [
       "warn",
       {
-        "code": 500,
-        "comments": 150,
-        "ignoreUrls": true,
-        "ignoreStrings": true,
-        "ignoreRegExpLiterals": true,
-        "ignoreTrailingComments": true,
-      }
+        code: 500,
+        comments: 150,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreRegExpLiterals: true,
+        ignoreTrailingComments: true,
+      },
     ],
   },
-  "overrides": [
+  overrides: [
     {
-      "files": ["*.tsx"],
-      "rules": {
+      files: ["*.tsx"],
+      rules: {
         "max-lines-per-function": [
           "warn",
           {
-            "max": 100,
-            "skipComments": true,
-            "skipBlankLines": true
-          }
+            max: 100,
+            skipComments: true,
+            skipBlankLines: true,
+          },
         ],
-      }
-    }
-  ]
-}
+      },
+    },
+  ],
+};

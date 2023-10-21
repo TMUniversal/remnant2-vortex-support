@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18.18.0']
+        node: ["18.18.0"]
     steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18.18.0']
+        node: ["18.18.0"]
     steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -99,7 +99,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dev-release-zip
-          path: 'RemnantII_Vortex_Support-dev-*.7z'
+          path: "RemnantII_Vortex_Support-dev-*.7z"
 
   package-release:
     name: Package
@@ -108,7 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18.18.0']
+        node: ["18.18.0"]
     steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -157,4 +157,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: release-zip
-          path: 'RemnantII_Vortex_Support-*.7z'
+          path: "RemnantII_Vortex_Support-*.7z"
