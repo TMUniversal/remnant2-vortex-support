@@ -2,7 +2,7 @@ import * as path from 'path';
 import { fs, log, types, util } from 'vortex-api';
 import { GAME_ID, SCRIPT_MODS_PATH, STEAMAPP_ID } from './common';
 import { PAK_MODS_PATH } from './installers/pak';
-import { XINPUT_DLL } from './installers/modEnabler';
+import { XINPUT_DLL, downloadAAM } from './installers/modEnabler';
 
 export default class RemnantII implements types.IGame {
     private context: types.IExtensionContext;
@@ -79,11 +79,11 @@ export default class RemnantII implements types.IGame {
             await fs.statAsync(allowModsPath);
         }
         catch (err) {
-            if (err.code !== 'ENOENT') log('warn', 'Unexpected error checking for Allow Asset Mods mod', err);
+            if (err.code !== 'ENOENT') log('warn', 'Unexpected error checking for "Allow Asset Mods" mod', err);
             return this.context.api.sendNotification({
                 id: 'remnant2-missing-injector',
                 type: 'warning',
-                message: this.context.api.translate('An injector mod is required'),
+                message: this.context.api.translate('"Allow Asset Mods" is required to enable Remnant II modding.'),
                 allowSuppress: true,
                 actions: [
                     {
@@ -92,10 +92,11 @@ export default class RemnantII implements types.IGame {
                             this.context.api.showDialog('question', 'Action required', {
                                 text: '"Allow Asset Mods" is required to enable Remnant II mods. ' +
                                     'Please ensure it is installed and enabled.' +
-                                    'If you are on Steam Deck, select the Steam Deck version of "Allow Asset Mods",' +
+                                    ' If you are on Steam Deck, select the Steam Deck version of "Allow Asset Mods",' +
                                     'and refer to the mod page for additional setup instructions.'
                             }, [
                                 { label: 'Cancel', action: () => dismiss() },
+                                { label: 'Download automatically', action: () => downloadAAM(this.context.api, false) },
                                 {
                                     label: 'Go to "Allow Asset Mods" mod page', action: () => {
                                         util.opn('https://www.nexusmods.com/remnant2/mods/2').catch(() => undefined);

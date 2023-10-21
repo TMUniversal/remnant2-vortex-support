@@ -1,7 +1,7 @@
 import { log, selectors } from "vortex-api";
 import { IExtensionContext } from 'vortex-api/lib/types/api';
 import { GAME_ID } from "./common";
-import { testModDir, installModDir, isModDirMod } from './installers/pak';
+import { testModDir, installModDir } from './installers/pak';
 import { testRootDir, installRootDir, isRootDirMod } from './installers/rootDirectory';
 import RemnantII from './RemnantII';
 import { installAAM, isAAMModType, testAAM } from "./installers/modEnabler";

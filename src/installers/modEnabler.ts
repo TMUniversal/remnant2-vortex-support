@@ -3,6 +3,7 @@ import { types, util, selectors, actions } from 'vortex-api';
 import { GAME_ID } from '../common';
 
 const AAM_MOD_ID = 2;
+const AAM_URL = `https://www.nexusmods.com/remnant2/mods/${AAM_MOD_ID}`;
 const PATTERN_ROOT_MOD = path.sep + 'Remnant2' + path.sep;
 export const XINPUT_DLL = 'xinput1_3.dll';
 
@@ -12,7 +13,7 @@ function testAAM(files: string[], gameId: string): { supported: boolean, require
 }
 
 export async function downloadAAM(api: types.IExtensionApi, update?: boolean) {
-  api.dismissNotification('aam-missing');
+  api.dismissNotification('remnant2-missing-injector');
   api.sendNotification({
     id: 'aam-installing',
     message: update ? 'Updating AAM' : 'Installing AAM',
@@ -63,24 +64,17 @@ export async function downloadAAM(api: types.IExtensionApi, update?: boolean) {
   }
 }
 
-async function installAAM(files: string[]): Promise<types.IInstallResult> {
-  // We're going to deploy "/Remnant2/" and whatever folders come alongside it.
-  //  i.e. SomeMod.7z
-  //  Will be deployed     => ../SomeMod/Remnant2/
-  //  Will be deployed     => ../SomeMod/Mods/
-  //  Will NOT be deployed => ../Readme.doc
+async function installAAM(getDiscoveryPath: () => string, files: string[], destinationPath: string): Promise<types.IInstallResult> {
   const contentFile: string | undefined = files.find(file => path.join('fakeDir', file).endsWith(PATTERN_ROOT_MOD));
   if (!contentFile) throw new Error('Could not install mod as it does not include a "Remnant2" folder.');
-  const idx = (contentFile).indexOf(PATTERN_ROOT_MOD) + 1;
-  const rootDir = path.basename(contentFile.substring(0, idx));
-  const filtered = files.filter(file => !file.endsWith(path.sep)
-    && (file.indexOf(rootDir) !== -1)
-    && (path.extname(file) !== '.txt'));
+
+  const filtered = files.filter(file => !file.endsWith(path.sep));
+
   const instructions: types.IInstruction[] = filtered.map(file => {
     return {
       type: 'copy',
       source: file,
-      destination: file.substr(idx),
+      destination: file,
     };
   });
 
@@ -90,35 +84,10 @@ async function installAAM(files: string[]): Promise<types.IInstallResult> {
 async function isAAMModType(instructions: types.IInstruction[]) {
   // Only interested in copy instructions.
   const copyInstructions = instructions.filter(instr => instr.type === 'copy');
-  // This is a tricky pattern so we're going to 1st present the different packaging
-  //  patterns we need to cater for:
-  //  1. Replacement mod with "Remnant2" folder. Does not require AAM so no
-  //    manifest files are included.
-  //  2. Replacement mod with "Remnant2" folder + one or more AAM mods included
-  //    alongside the Remnant2 folder inside a "Mods" folder.
-  //  3. A regular AAM mod with a "Remnant2" folder inside the mod's root dir.
-  //
-  // pattern 1:
-  //  - Ensure we don't have manifest files
-  //  - Ensure we have a "Remnant2" folder
-  //
-  // To solve patterns 2 and 3 we're going to:
-  //  Check whether we have any manifest files, if we do, we expect the following
-  //    archive structure in order for the modType to function correctly:
-  //    archive.zip =>
-  //      ../Remnant2/
-  //      ../Mods/
-  //      ../Mods/A_AAM_MOD\manifest.json
-  const hasManifest = copyInstructions.find(instr =>
-    instr.destination?.endsWith(MANIFEST_FILE))
-  const hasModsFolder = copyInstructions.find(instr =>
-    instr.destination?.startsWith('Mods' + path.sep)) !== undefined;
-  const hasContentFolder = copyInstructions.find(instr =>
-    instr.destination?.startsWith('Remnant2' + path.sep)) !== undefined
 
-  return (hasManifest)
-    ? Promise.resolve(hasContentFolder && hasModsFolder)
-    : Promise.resolve(hasContentFolder);
+  // if the mod contains `Remnant2/Binaries/Win64/xinput1_3.dll` then it is the mod enabler
+  return Promise.resolve(copyInstructions.find(instr =>
+    instr.destination?.startsWith(path.join('Remnant2', 'Binaries', 'Win64', XINPUT_DLL))) !== undefined);
 }
 
 
