@@ -48,8 +48,8 @@ devDependencies:
     specifier: 18.2.0
     version: 18.2.0
   react-bootstrap:
-    specifier: 2.9.0
-    version: 2.9.0(@types/react@18.2.27)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 2.9.1
+    version: 2.9.1(@types/react@18.2.27)(react-dom@18.2.0)(react@18.2.0)
   standard-version:
     specifier: 9.5.0
     version: 9.5.0
@@ -2957,8 +2957,8 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /react-bootstrap@2.9.0(@types/react@18.2.27)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-dGh6fGjqR9MBzPOp2KbXJznt1Zy6SWepXYUdxMT18Zu/wJ73HCU8JNZe9dfzjmVssZYsJH9N3HHE4wAtQvNz7g==}
+  /react-bootstrap@2.9.1(@types/react@18.2.27)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ezgmh/ARCYp18LbZEqPp0ppvy+ytCmycDORqc8vXSKYV3cer4VH7OReV8uMOoKXmYzivJTxgzGHalGrHamryHA==}
     peerDependencies:
       '@types/react': '>=16.14.8'
       react: '>=16.14.0'
