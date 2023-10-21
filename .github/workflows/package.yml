@@ -70,6 +70,8 @@ jobs:
           version: 8
           run_install: false
 
+      - uses: actions/checkout@v4
+
       - name: Get pnpm store directory
         shell: bash
         run: |
