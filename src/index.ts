@@ -1,4 +1,4 @@
-import { log, selectors } from "vortex-api";
+import { log } from "vortex-api";
 import { IExtensionContext } from "vortex-api/lib/types/api";
 import { GAME_ID } from "./common";
 import { testModDir, installModDir } from "./installers/pak";
@@ -30,17 +30,10 @@ function main(context: IExtensionContext) {
   // Register the installers and modTypes we'll need to handle different kinds of mod.
 
   // mods containing .pak files at the root need to be installed in the "~mods" folder
-  context.registerInstaller(
-    "r2-pak-installer",
-    50,
-    testModDir,
-    (files, destinationPath) => installModDir(context, files, destinationPath),
-  );
+  context.registerInstaller("r2-pak-installer", 50, testModDir, installModDir);
 
   // Allow Asset Mods (AAM) is a mod that allows other mods to be loaded.
-  context.registerInstaller("r2-aam-installer", 30, testAAM, (files, dest) =>
-    installAAM(getDiscoveryPath, files, dest),
-  );
+  context.registerInstaller("r2-aam-installer", 30, testAAM, installAAM);
   context.registerModType(
     "AAM",
     30,
@@ -59,11 +52,6 @@ function main(context: IExtensionContext) {
     isRootDirMod,
   );
 
-  // context.once(() => {
-  //     context.api.onAsync('added-files', (profileId, files) => handleAddedFiles(context.api, profileId, files));
-  //     context.api.events.on('mod-enabled', (profileId: string, modId: string) => modToggled(context.api, profileId, modId));
-  //     // context.api.events.on('mod-disabled', (profileId: string, modId: string) => modToggled(context.api, profileId, modId));
-  // });
   return true;
 }
 

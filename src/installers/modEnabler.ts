@@ -86,11 +86,7 @@ export async function downloadAAM(api: types.IExtensionApi, update?: boolean) {
   }
 }
 
-async function installAAM(
-  getDiscoveryPath: () => string,
-  files: string[],
-  destinationPath: string,
-): Promise<types.IInstallResult> {
+async function installAAM(files: string[]): Promise<types.IInstallResult> {
   const contentFile: string | undefined = files.find((file) =>
     path.join("fakeDir", file).endsWith(PATTERN_ROOT_MOD),
   );

@@ -1,7 +1,6 @@
 import * as path from "path";
 import { types } from "vortex-api";
 import { GAME_ID } from "../common";
-import { IExtensionContext } from "vortex-api/lib/types/api";
 
 export const PAK_MODS_PATH = path.join(
   "Remnant2",
@@ -25,11 +24,7 @@ async function testModDir(
   return { supported };
 }
 
-async function installModDir(
-  context: IExtensionContext,
-  files: string[],
-  destinationPath: string,
-): Promise<types.IInstallResult> {
+async function installModDir(files: string[]): Promise<types.IInstallResult> {
   const contentFile: string | undefined = files.find((file) =>
     file.endsWith(PATTERN_PAK_MOD),
   );
