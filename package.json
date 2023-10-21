@@ -15,11 +15,11 @@
     "bumpversion": "standard-version"
   },
   "devDependencies": {
+    "7z-bin": "Nexus-Mods/7z-bin",
     "@types/node": "20.8.4",
     "@types/react": "18.2.27",
     "@typescript-eslint/eslint-plugin": "6.7.5",
     "@typescript-eslint/parser": "6.7.5",
-    "7z-bin": "Nexus-Mods/7z-bin",
     "bluebird": "3.7.2",
     "copyfiles": "2.4.1",
     "eslint": "8.51.0",
@@ -30,6 +30,7 @@
     "json": "11.0.0",
     "react": "18.2.0",
     "react-bootstrap": "2.9.0",
+    "standard-version": "9.5.0",
     "ts-loader": "9.5.0",
     "typescript": "5.2.2",
     "vortex-api": "Nexus-Mods/vortex-api",
