@@ -17,7 +17,7 @@ tasks:
       - dist/gameart.jpg
       - dist/LICENSE.txt
     cmds:
-      - yarn build
+      - pnpm run build
 
   package:
     deps:
