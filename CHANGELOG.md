@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/TMUniversal/remnant2-vortex-support/compare/v1.0.0...v1.0.1) (2023-12-03)
+
+
+### Bug Fixes
+
+* **deps:** add eslint-plugin-react ([4c7ff9b](https://github.com/TMUniversal/remnant2-vortex-support/commit/4c7ff9bf9f516421ec4918ce23f002383e4e1603))
+* update aam installer ([fb446a8](https://github.com/TMUniversal/remnant2-vortex-support/commit/fb446a81ad8dce4bab9a3b24d720a84beba266fa))
+
 ## [1.0.0](https://github.com/TMUniversal/remnant2-vortex-support/compare/v0.0.4...v1.0.0) (2023-10-21)
 
 
