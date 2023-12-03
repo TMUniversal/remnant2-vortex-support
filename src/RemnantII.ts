@@ -2,7 +2,7 @@ import * as path from "path";
 import { fs, log, types, util } from "vortex-api";
 import { GAME_ID, SCRIPT_MODS_PATH, STEAMAPP_ID } from "./common";
 import { PAK_MODS_PATH } from "./installers/pak";
-import { XINPUT_DLL, downloadAAM } from "./installers/modEnabler";
+import { UE4SS_DLL, downloadAAM } from "./installers/modEnabler";
 
 export default class RemnantII implements types.IGame {
   private context: types.IExtensionContext;
@@ -86,7 +86,7 @@ export default class RemnantII implements types.IGame {
       "Remnant2",
       "Binaries",
       "Win64",
-      XINPUT_DLL,
+      UE4SS_DLL,
     );
     try {
       await fs.statAsync(allowModsPath);

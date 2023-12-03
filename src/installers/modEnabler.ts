@@ -1,19 +1,20 @@
 import * as path from "path";
-import { types, util, selectors, actions } from "vortex-api";
-import { GAME_ID } from "../common";
+import {types, util, selectors, actions} from "vortex-api";
+import {GAME_ID} from "../common";
 
 const AAM_MOD_ID = 2;
 const AAM_URL = `https://www.nexusmods.com/remnant2/mods/${AAM_MOD_ID}`;
-const PATTERN_ROOT_MOD = path.sep + "Remnant2" + path.sep;
-export const XINPUT_DLL = "xinput1_3.dll";
+const AAM_MOD_PATH = path.join("Remnant2", "Binaries", "Win64");
+const PATTERN_ROOT_MOD = path.sep + "Mods" + path.sep;
+export const UE4SS_DLL = "UE4SS.dll";
 
 function testAAM(
   files: string[],
   gameId: string,
 ): { supported: boolean; requiredFiles?: string[] } {
   const supported =
-    gameId === GAME_ID && !!files.find((f) => path.basename(f) === XINPUT_DLL);
-  return { supported, requiredFiles: [] };
+    gameId === GAME_ID && !!files.find((f) => path.basename(f) === UE4SS_DLL);
+  return {supported, requiredFiles: []};
 }
 
 export async function downloadAAM(api: types.IExtensionApi, update?: boolean) {
@@ -57,14 +58,14 @@ export async function downloadAAM(api: types.IExtensionApi, update?: boolean) {
         undefined,
         cb,
         undefined,
-        { allowInstall: false },
+        {allowInstall: false},
       ),
     );
     const modId = await util.toPromise<string>((cb) =>
       api.events.emit(
         "start-install-download",
         dlId,
-        { allowAutoEnable: false },
+        {allowAutoEnable: false},
         cb,
       ),
     );
@@ -90,10 +91,11 @@ async function installAAM(files: string[]): Promise<types.IInstallResult> {
   const contentFile: string | undefined = files.find((file) =>
     path.join("fakeDir", file).endsWith(PATTERN_ROOT_MOD),
   );
-  if (!contentFile)
+  if (!contentFile) {
     throw new Error(
-      'Could not install mod as it does not include a "Remnant2" folder.',
+      'Could not install mod as it does not include a "Mods" folder.',
     );
+  }
 
   const filtered = files.filter((file) => !file.endsWith(path.sep));
 
@@ -101,11 +103,13 @@ async function installAAM(files: string[]): Promise<types.IInstallResult> {
     return {
       type: "copy",
       source: file,
-      destination: file,
+      // copy to Remnant2/Binaries/Win64/ instead of Remnant2/Binaries/Win64/Mods/RM2-AAM-.../
+      // therefore the `RM2-AAM-...` prefix must be removed from `file`
+      destination: path.join(AAM_MOD_PATH, file.substring(file.indexOf(path.sep) + 1)),
     };
   });
 
-  return { instructions };
+  return {instructions};
 }
 
 async function isAAMModType(instructions: types.IInstruction[]) {
@@ -114,15 +118,12 @@ async function isAAMModType(instructions: types.IInstruction[]) {
     (instr) => instr.type === "copy",
   );
 
-  // if the mod contains `Remnant2/Binaries/Win64/xinput1_3.dll` then it is the mod enabler
+  // if the mod contains `/UE4SS.dll` then it is the mod enabler
   return Promise.resolve(
     copyInstructions.find(
-      (instr) =>
-        instr.destination?.startsWith(
-          path.join("Remnant2", "Binaries", "Win64", XINPUT_DLL),
-        ),
+      (instr) => path.basename(instr.source) === UE4SS_DLL,
     ) !== undefined,
   );
 }
 
-export { testAAM, installAAM, isAAMModType };
+export {testAAM, installAAM, isAAMModType};
