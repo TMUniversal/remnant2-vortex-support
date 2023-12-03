@@ -120,10 +120,10 @@ export default class RemnantII implements types.IGame {
                 },
                 [
                   { label: "Cancel", action: () => dismiss() },
-                  {
-                    label: "Download automatically",
-                    action: () => downloadAAM(this.context.api, false),
-                  },
+                  // {
+                  //   label: "Download automatically",
+                  //   action: () => downloadAAM(this.context.api, false),
+                  // },
                   {
                     label: 'Go to "Allow Asset Mods" mod page',
                     action: () => {
