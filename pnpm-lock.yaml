@@ -9,8 +9,8 @@ devDependencies:
     specifier: github:Nexus-Mods/7z-bin
     version: github.com/Nexus-Mods/7z-bin/09c2bc201f8d00860ffa28b2decd7db26d62d115
   '@types/node':
-    specifier: 20.10.2
-    version: 20.10.2
+    specifier: 20.10.8
+    version: 20.10.8
   '@types/react':
     specifier: 18.2.41
     version: 18.2.41
@@ -249,8 +249,8 @@ packages:
     resolution: {integrity: sha512-Kfe/D3hxHTusnPNRbycJE1N77WHDsdS4AjUYIzlDzhDrS47NrwuL3YW4VITxwR7KCVpzwgy4Rbj829KSSQmwXQ==}
     dev: true
 
-  /@types/node@20.10.2:
-    resolution: {integrity: sha512-37MXfxkb0vuIlRKHNxwCkb60PNBpR94u4efQuN4JgIAm66zfCDXGSAFCef9XUWFovX2R1ok6Z7MHhtdVXXkkIw==}
+  /@types/node@20.10.8:
+    resolution: {integrity: sha512-f8nQs3cLxbAFc00vEU59yf9UyGUftkPaLGfvbVOIDdx2i1b8epBqj2aNGyP19fiyXWvlmZ7qC1XLjAzw/OKIeA==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -2233,7 +2233,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.10.2
+      '@types/node': 20.10.8
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
