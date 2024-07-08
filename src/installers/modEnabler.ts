@@ -7,7 +7,12 @@ import RemnantII from "../RemnantII";
 const AAM_MOD_ID = 2;
 const AAM_URL = `https://www.nexusmods.com/remnant2/mods/${AAM_MOD_ID}`;
 const AAM_MOD_PATH = path.join("Remnant2", "Binaries", "Win64");
-const AAM_MOD_PATH_XBOX = path.join("Content", "Remnant2", "Binaries", "WinGDK")
+const AAM_MOD_PATH_XBOX = path.join(
+  "Content",
+  "Remnant2",
+  "Binaries",
+  "WinGDK",
+);
 const PATTERN_ROOT_MOD = path.sep + "Mods" + path.sep;
 export const UE4SS_DLL = "UE4SS.dll";
 
@@ -113,7 +118,10 @@ async function installAAM(files: string[]): Promise<types.IInstallResult> {
       source: file,
       // copy to Remnant2/Binaries/Win64/ instead of Remnant2/Binaries/Win64/Mods/RM2-AAM-.../
       // therefore the `RM2-AAM-...` prefix must be removed from `file`
-      destination: path.join(AAM_PATH, file.substring(file.indexOf(path.sep) + 1)),
+      destination: path.join(
+        AAM_PATH,
+        file.substring(file.indexOf(path.sep) + 1),
+      ),
     };
   });
 
@@ -135,4 +143,3 @@ async function isAAMModType(instructions: types.IInstruction[]) {
 }
 
 export { installAAM, isAAMModType, testAAM, AAM_MOD_PATH, AAM_MOD_PATH_XBOX };
-

@@ -56,7 +56,7 @@ export default class RemnantII implements types.IGame {
   async queryPath(): Promise<string> {
     const game: types.IGameStoreEntry = await util.GameStoreHelper.findByAppId([
       STEAMAPP_ID,
-      XBOXAPP_ID
+      XBOXAPP_ID,
     ]);
     if (!!game) return game.gamePath;
   }

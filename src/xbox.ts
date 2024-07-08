@@ -1,7 +1,7 @@
-import { fs } from 'vortex-api';
-import RemnantII from './RemnantII';
-import { AAM_MOD_PATH_XBOX } from './installers/modEnabler'
-import path = require('path');
+import { fs } from "vortex-api";
+import RemnantII from "./RemnantII";
+import { AAM_MOD_PATH_XBOX } from "./installers/modEnabler";
+import path = require("path");
 
 async function isXboxStoreVersion(game: RemnantII): Promise<boolean> {
   const gamePath: string = await game.queryPath();

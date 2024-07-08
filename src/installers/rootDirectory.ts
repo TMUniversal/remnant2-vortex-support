@@ -58,8 +58,8 @@ async function isRootDirMod(instructions: types.IInstruction[]) {
   );
 
   const hasContentFolder =
-    copyInstructions.find(
-      (instr) => instr.destination?.startsWith("Remnant2" + path.sep),
+    copyInstructions.find((instr) =>
+      instr.destination?.startsWith("Remnant2" + path.sep),
     ) !== undefined;
 
   return Promise.resolve(hasContentFolder);
