@@ -1,8 +1,10 @@
 import * as path from "path";
 import { fs, log, types, util } from "vortex-api";
-import { GAME_ID, SCRIPT_MODS_PATH, STEAMAPP_ID } from "./common";
+import { GAME_ID, SCRIPT_MODS_PATH, STEAMAPP_ID, XBOXAPP_ID } from "./common";
 import { PAK_MODS_PATH } from "./installers/pak";
-import { UE4SS_DLL, downloadAAM } from "./installers/modEnabler";
+import { UE4SS_DLL } from "./installers/modEnabler";
+import { AAM_MOD_PATH, AAM_MOD_PATH_XBOX } from "./installers/modEnabler";
+import { isXboxStoreVersion } from "./xbox";
 
 export default class RemnantII implements types.IGame {
   private context: types.IExtensionContext;
@@ -32,7 +34,7 @@ export default class RemnantII implements types.IGame {
     this.details = {
       steamAppId: parseInt(STEAMAPP_ID),
       // gogAppId: GOGAPP_ID,
-      // xboxAppId: XBOXAPP_ID,
+      xboxAppId: XBOXAPP_ID,
     };
     this.supportedTools = [
       {
@@ -51,9 +53,10 @@ export default class RemnantII implements types.IGame {
     this.shell = false;
   }
 
-  async queryPath() {
+  async queryPath(): Promise<string> {
     const game: types.IGameStoreEntry = await util.GameStoreHelper.findByAppId([
       STEAMAPP_ID,
+      XBOXAPP_ID
     ]);
     if (!!game) return game.gamePath;
   }
@@ -83,9 +86,7 @@ export default class RemnantII implements types.IGame {
     // Check if Allow Asset Mods (RE-UE4SS) is installed/deployed.
     const allowModsPath = path.join(
       discovery.path,
-      "Remnant2",
-      "Binaries",
-      "Win64",
+      isXboxStoreVersion(this) ? AAM_MOD_PATH_XBOX : AAM_MOD_PATH,
       UE4SS_DLL,
     );
     try {

@@ -1,10 +1,13 @@
 import * as path from "path";
-import {types, util, selectors, actions} from "vortex-api";
-import {GAME_ID} from "../common";
+import { actions, selectors, types, util } from "vortex-api";
+import { GAME_ID } from "../common";
+import { isXboxStoreVersion } from "../xbox";
+import RemnantII from "../RemnantII";
 
 const AAM_MOD_ID = 2;
 const AAM_URL = `https://www.nexusmods.com/remnant2/mods/${AAM_MOD_ID}`;
 const AAM_MOD_PATH = path.join("Remnant2", "Binaries", "Win64");
+const AAM_MOD_PATH_XBOX = path.join("Content", "Remnant2", "Binaries", "WinGDK")
 const PATTERN_ROOT_MOD = path.sep + "Mods" + path.sep;
 export const UE4SS_DLL = "UE4SS.dll";
 
@@ -14,7 +17,7 @@ function testAAM(
 ): { supported: boolean; requiredFiles?: string[] } {
   const supported =
     gameId === GAME_ID && !!files.find((f) => path.basename(f) === UE4SS_DLL);
-  return {supported, requiredFiles: []};
+  return { supported, requiredFiles: [] };
 }
 
 export async function downloadAAM(api: types.IExtensionApi, update?: boolean) {
@@ -58,14 +61,14 @@ export async function downloadAAM(api: types.IExtensionApi, update?: boolean) {
         undefined,
         cb,
         undefined,
-        {allowInstall: false},
+        { allowInstall: false },
       ),
     );
     const modId = await util.toPromise<string>((cb) =>
       api.events.emit(
         "start-install-download",
         dlId,
-        {allowAutoEnable: false},
+        { allowAutoEnable: false },
         cb,
       ),
     );
@@ -99,17 +102,22 @@ async function installAAM(files: string[]): Promise<types.IInstallResult> {
 
   const filtered = files.filter((file) => !file.endsWith(path.sep));
 
+  let AAM_PATH = AAM_MOD_PATH;
+  if (isXboxStoreVersion(new RemnantII({}))) {
+    AAM_PATH = AAM_MOD_PATH_XBOX;
+  }
+
   const instructions: types.IInstruction[] = filtered.map((file) => {
     return {
       type: "copy",
       source: file,
       // copy to Remnant2/Binaries/Win64/ instead of Remnant2/Binaries/Win64/Mods/RM2-AAM-.../
       // therefore the `RM2-AAM-...` prefix must be removed from `file`
-      destination: path.join(AAM_MOD_PATH, file.substring(file.indexOf(path.sep) + 1)),
+      destination: path.join(AAM_PATH, file.substring(file.indexOf(path.sep) + 1)),
     };
   });
 
-  return {instructions};
+  return { instructions };
 }
 
 async function isAAMModType(instructions: types.IInstruction[]) {
@@ -126,4 +134,5 @@ async function isAAMModType(instructions: types.IInstruction[]) {
   );
 }
 
-export {testAAM, installAAM, isAAMModType};
+export { installAAM, isAAMModType, testAAM, AAM_MOD_PATH, AAM_MOD_PATH_XBOX };
+
