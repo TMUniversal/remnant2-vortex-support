@@ -98,7 +98,7 @@ jobs:
         run: task package-dev
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dev-release-zip
           path: "RemnantII_Vortex_Support-dev-*.7z"
@@ -156,7 +156,7 @@ jobs:
         run: task package
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-zip
           path: "RemnantII_Vortex_Support-*.7z"
