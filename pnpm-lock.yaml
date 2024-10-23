@@ -12,14 +12,14 @@ importers:
         specifier: github:Nexus-Mods/7z-bin
         version: https://codeload.github.com/Nexus-Mods/7z-bin/tar.gz/09c2bc201f8d00860ffa28b2decd7db26d62d115
       '@types/node':
-        specifier: 20.10.2
-        version: 20.10.2
+        specifier: 20.17.0
+        version: 20.17.0
       '@types/react':
         specifier: 18.2.41
         version: 18.2.41
       '@typescript-eslint/eslint-plugin':
         specifier: 6.13.1
-        version: 6.13.1(@typescript-eslint/parser@6.13.1)(eslint@8.55.0)(typescript@5.3.2)
+        version: 6.13.1(@typescript-eslint/parser@6.13.1(eslint@8.55.0)(typescript@5.3.2))(eslint@8.55.0)(typescript@5.3.2)
       '@typescript-eslint/parser':
         specifier: 6.13.1
         version: 6.13.1(eslint@8.55.0)(typescript@5.3.2)
@@ -34,7 +34,7 @@ importers:
         version: 9.1.0(eslint@8.55.0)
       eslint-plugin-prettier:
         specifier: 5.0.1
-        version: 5.0.1(eslint-config-prettier@9.1.0)(eslint@8.55.0)(prettier@3.0.3)
+        version: 5.0.1(@types/eslint@8.44.6)(eslint-config-prettier@9.1.0(eslint@8.55.0))(eslint@8.55.0)(prettier@3.0.3)
       eslint-plugin-react:
         specifier: 7.33.2
         version: 7.33.2(eslint@8.55.0)
@@ -52,7 +52,7 @@ importers:
         version: 5.3.2
       vortex-api:
         specifier: github:Nexus-Mods/vortex-api
-        version: https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/43c33c5cfb667af0b36b6a568f85827191543709
+        version: https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/920862d472183b37a2b64fcd1bdbceadbf07c4e9
       webpack:
         specifier: 5.89.0
         version: 5.89.0(webpack-cli@5.1.4)
@@ -64,7 +64,6 @@ packages:
 
   7z-bin@https://codeload.github.com/Nexus-Mods/7z-bin/tar.gz/09c2bc201f8d00860ffa28b2decd7db26d62d115:
     resolution: {tarball: https://codeload.github.com/Nexus-Mods/7z-bin/tar.gz/09c2bc201f8d00860ffa28b2decd7db26d62d115}
-    name: 7z-bin
     version: 23.0.1
     hasBin: true
 
@@ -109,6 +108,7 @@ packages:
   '@humanwhocodes/config-array@0.11.13':
     resolution: {integrity: sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -116,6 +116,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.1':
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
+    deprecated: Use @eslint/object-schema instead
 
   '@hutson/parse-repository-url@3.0.2':
     resolution: {integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==}
@@ -173,8 +174,8 @@ packages:
   '@types/minimist@1.2.4':
     resolution: {integrity: sha512-Kfe/D3hxHTusnPNRbycJE1N77WHDsdS4AjUYIzlDzhDrS47NrwuL3YW4VITxwR7KCVpzwgy4Rbj829KSSQmwXQ==}
 
-  '@types/node@20.10.2':
-    resolution: {integrity: sha512-37MXfxkb0vuIlRKHNxwCkb60PNBpR94u4efQuN4JgIAm66zfCDXGSAFCef9XUWFovX2R1ok6Z7MHhtdVXXkkIw==}
+  '@types/node@20.17.0':
+    resolution: {integrity: sha512-a7zRo0f0eLo9K5X9Wp5cAqTUNGzuFLDG2R7C4HY2BhcMAsxgSPuRvAC1ZB6QkuUQXf0YZAgfOX2ZyrBa2n4nHQ==}
 
   '@types/normalize-package-data@2.4.3':
     resolution: {integrity: sha512-ehPtgRgaULsFG8x0NeYJvmyH1hmlfsNLujHe9dQEia/7MAJYdzMSi19JtchUHjmBA6XC/75dK55mzZH+RyieSg==}
@@ -764,6 +765,7 @@ packages:
   eslint@8.55.0:
     resolution: {integrity: sha512-iyUUAM0PCKj5QpwGfmCAG9XXbZCWsqP/eWAWrG/W0umvjuLRBECwSFdt+rCntju0xEH7teIABPwXpahftIaTdA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -930,6 +932,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@13.23.0:
     resolution: {integrity: sha512-XAmF0RjlrjY23MA51q3HltdlGxUpXPvg0GioKiD9X6HD28iMjo2dKC8Vqwm7lne4GNr78+RHTfliktR6ZH09wA==}
@@ -1029,6 +1032,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -1565,6 +1569,10 @@ packages:
   q@1.5.1:
     resolution: {integrity: sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==}
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
+    deprecated: |-
+      You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
+      (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -1651,6 +1659,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   run-applescript@5.0.0:
@@ -1951,8 +1960,8 @@ packages:
   unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
 
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+  undici-types@6.19.8:
+    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
 
   untildify@4.0.0:
     resolution: {integrity: sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==}
@@ -1973,10 +1982,9 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  vortex-api@https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/43c33c5cfb667af0b36b6a568f85827191543709:
-    resolution: {tarball: https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/43c33c5cfb667af0b36b6a568f85827191543709}
-    name: vortex-api
-    version: 1.8.5-r6
+  vortex-api@https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/920862d472183b37a2b64fcd1bdbceadbf07c4e9:
+    resolution: {tarball: https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/920862d472183b37a2b64fcd1bdbceadbf07c4e9}
+    version: 1.8.11
     hasBin: true
 
   watchpack@2.4.0:
@@ -2190,9 +2198,9 @@ snapshots:
 
   '@types/minimist@1.2.4': {}
 
-  '@types/node@20.10.2':
+  '@types/node@20.17.0':
     dependencies:
-      undici-types: 5.26.5
+      undici-types: 6.19.8
 
   '@types/normalize-package-data@2.4.3': {}
 
@@ -2208,7 +2216,7 @@ snapshots:
 
   '@types/semver@7.5.4': {}
 
-  '@typescript-eslint/eslint-plugin@6.13.1(@typescript-eslint/parser@6.13.1)(eslint@8.55.0)(typescript@5.3.2)':
+  '@typescript-eslint/eslint-plugin@6.13.1(@typescript-eslint/parser@6.13.1(eslint@8.55.0)(typescript@5.3.2))(eslint@8.55.0)(typescript@5.3.2)':
     dependencies:
       '@eslint-community/regexpp': 4.9.1
       '@typescript-eslint/parser': 6.13.1(eslint@8.55.0)(typescript@5.3.2)
@@ -2223,6 +2231,7 @@ snapshots:
       natural-compare: 1.4.0
       semver: 7.5.4
       ts-api-utils: 1.0.3(typescript@5.3.2)
+    optionalDependencies:
       typescript: 5.3.2
     transitivePeerDependencies:
       - supports-color
@@ -2235,6 +2244,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 6.13.1
       debug: 4.3.4
       eslint: 8.55.0
+    optionalDependencies:
       typescript: 5.3.2
     transitivePeerDependencies:
       - supports-color
@@ -2251,6 +2261,7 @@ snapshots:
       debug: 4.3.4
       eslint: 8.55.0
       ts-api-utils: 1.0.3(typescript@5.3.2)
+    optionalDependencies:
       typescript: 5.3.2
     transitivePeerDependencies:
       - supports-color
@@ -2266,6 +2277,7 @@ snapshots:
       is-glob: 4.0.3
       semver: 7.5.4
       ts-api-utils: 1.0.3(typescript@5.3.2)
+    optionalDependencies:
       typescript: 5.3.2
     transitivePeerDependencies:
       - supports-color
@@ -2890,13 +2902,15 @@ snapshots:
     dependencies:
       eslint: 8.55.0
 
-  eslint-plugin-prettier@5.0.1(eslint-config-prettier@9.1.0)(eslint@8.55.0)(prettier@3.0.3):
+  eslint-plugin-prettier@5.0.1(@types/eslint@8.44.6)(eslint-config-prettier@9.1.0(eslint@8.55.0))(eslint@8.55.0)(prettier@3.0.3):
     dependencies:
       eslint: 8.55.0
-      eslint-config-prettier: 9.1.0(eslint@8.55.0)
       prettier: 3.0.3
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
+    optionalDependencies:
+      '@types/eslint': 8.44.6
+      eslint-config-prettier: 9.1.0(eslint@8.55.0)
 
   eslint-plugin-react@7.33.2(eslint@8.55.0):
     dependencies:
@@ -3404,7 +3418,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 20.10.2
+      '@types/node': 20.17.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -4169,7 +4183,7 @@ snapshots:
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
 
-  undici-types@5.26.5: {}
+  undici-types@6.19.8: {}
 
   untildify@4.0.0: {}
 
@@ -4190,7 +4204,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vortex-api@https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/43c33c5cfb667af0b36b6a568f85827191543709: {}
+  vortex-api@https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/920862d472183b37a2b64fcd1bdbceadbf07c4e9: {}
 
   watchpack@2.4.0:
     dependencies:
@@ -4247,8 +4261,9 @@ snapshots:
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.9(webpack@5.89.0)
       watchpack: 2.4.0
-      webpack-cli: 5.1.4(webpack@5.89.0)
       webpack-sources: 3.2.3
+    optionalDependencies:
+      webpack-cli: 5.1.4(webpack@5.89.0)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
