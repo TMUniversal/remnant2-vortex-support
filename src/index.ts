@@ -43,7 +43,7 @@ function main(context: IExtensionContext) {
   );
 
   // Other mods that need to be added to the root folder
-  context.registerInstaller("r2rootDir", 50, testRootDir, installRootDir);
+  context.registerInstaller("r2rootDir", 40, testRootDir, installRootDir);
   context.registerModType(
     "r2rootDir",
     25,
