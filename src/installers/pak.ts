@@ -4,8 +4,8 @@ import { GAME_ID } from "../common";
 
 export const PAK_MODS_PATH = path.join(
   "Remnant2",
-  "Binaries",
-  "Win64",
+  "Content",
+  "Paks",
   "~mods",
 );
 const PATTERN_PAK_MOD = ".pak";
