@@ -17,7 +17,7 @@
   "devDependencies": {
     "7z-bin": "github:Nexus-Mods/7z-bin",
     "@types/node": "20.10.2",
-    "@types/react": "18.2.41",
+    "@types/react": "18.3.18",
     "@typescript-eslint/eslint-plugin": "6.13.1",
     "@typescript-eslint/parser": "6.13.1",
     "copyfiles": "2.4.1",
