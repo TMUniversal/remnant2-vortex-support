@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/TMUniversal/remnant2-vortex-support/compare/v1.1.0...v1.1.1) (2024-12-20)
+
+
+### Bug Fixes
+
+* use stat over exists ([6a45b87](https://github.com/TMUniversal/remnant2-vortex-support/commit/6a45b87b047c370e570637f8ca72bac686f7ed75))
+
 ## [1.1.0](https://github.com/TMUniversal/remnant2-vortex-support/compare/v1.0.1...v1.1.0) (2024-12-19)
 
 
