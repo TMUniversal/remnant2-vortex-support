@@ -27,7 +27,7 @@
     "eslint-plugin-react": "7.33.2",
     "json": "11.0.0",
     "standard-version": "9.5.0",
-    "ts-loader": "9.5.1",
+    "ts-loader": "9.6.2",
     "typescript": "5.3.2",
     "vortex-api": "github:Nexus-Mods/vortex-api",
     "webpack": "5.89.0",
